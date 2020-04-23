@@ -4,7 +4,6 @@ public class Item {
     private Long id;
     private String name;
     private Double price;
-    private int count;
 
     public Item(String name, Double price) {
         this.name = name;
