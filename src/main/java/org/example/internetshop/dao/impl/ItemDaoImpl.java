@@ -1,8 +1,8 @@
 package org.example.internetshop.dao.impl;
 
 import java.util.List;
-import java.util.NoSuchElementException;
 import java.util.Optional;
+import java.util.stream.IntStream;
 import org.example.internetshop.dao.ItemDao;
 import org.example.internetshop.dao.Storage;
 import org.example.internetshop.lib.Dao;
@@ -32,19 +32,14 @@ public class ItemDaoImpl implements ItemDao {
 
     @Override
     public Item update(Item item) {
-        Long id = Storage.items
-                .stream()
-                .filter(i -> i.equals(item))
-                .map(Item::getId)
-                .findFirst()
-                .orElseThrow(() ->
-                        new NoSuchElementException("Can't find item for update"));
-        Storage.items.set(id.intValue() - 1, item);
+        IntStream.range(0, Storage.items.size())
+                .filter(x -> item.getId().equals(Storage.items.get(x).getId()))
+                .forEach(i -> Storage.items.set(i, item));
         return item;
     }
 
     @Override
     public boolean delete(Long id) {
-        return Storage.items.remove(id.intValue() - 1) != null;
+        return Storage.items.removeIf(item -> item.getId().equals(id));
     }
 }

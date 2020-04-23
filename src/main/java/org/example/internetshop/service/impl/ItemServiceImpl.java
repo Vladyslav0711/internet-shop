@@ -2,7 +2,6 @@ package org.example.internetshop.service.impl;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 import org.example.internetshop.dao.ItemDao;
 import org.example.internetshop.lib.Inject;
 import org.example.internetshop.lib.Service;
@@ -27,14 +26,6 @@ public class ItemServiceImpl implements ItemService {
     @Override
     public List<Item> getAll() {
         return itemDao.getAll();
-    }
-
-    @Override
-    public List<Item> getAllAvailable() {
-        return itemDao.getAll()
-                .stream()
-                .filter(i -> i.getCount() != 0)
-                .collect(Collectors.toList());
     }
 
     @Override

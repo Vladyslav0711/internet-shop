@@ -1,16 +1,14 @@
 package org.example.internetshop.model;
 
 public class Item {
-    private static Long incrementId = 0L;
     private Long id;
     private String name;
     private Double price;
     private int count;
 
-    public Item(String name, Double price, int count) {
+    public Item(String name, Double price) {
         this.name = name;
         this.price = price;
-        this.count = count;
     }
 
     public Long getId() {
@@ -37,20 +35,11 @@ public class Item {
         this.price = price;
     }
 
-    public int getCount() {
-        return count;
-    }
-
-    public void updateCount(int value) {
-        count += value;
-    }
-
     @Override
     public String toString() {
         return "Item{"
                 + "name='" + name + '\''
                 + ", price=" + price
-                + ", count=" + count
                 + '}';
     }
 }

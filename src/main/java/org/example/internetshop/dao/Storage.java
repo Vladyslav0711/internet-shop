@@ -11,7 +11,7 @@ public class Storage {
     private static Long idItem = 0L;
 
     public static void addItemToList(Item item) {
-        items.add(item);
         item.setId(++idItem);
+        items.add(item);
     }
 }
