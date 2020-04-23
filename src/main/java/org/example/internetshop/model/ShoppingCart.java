@@ -1,11 +1,17 @@
 package org.example.internetshop.model;
 
+import java.util.ArrayList;
 import java.util.List;
 
-public class Bucket {
+public class ShoppingCart {
     private Long id;
     private User user;
-    private List<Item> items;
+    private List<Product> products;
+
+    public ShoppingCart(User user) {
+        this.user = user;
+        this.products = new ArrayList<>();
+    }
 
     public User getUser() {
         return user;
@@ -23,11 +29,11 @@ public class Bucket {
         this.id = id;
     }
 
-    public List<Item> getItems() {
-        return items;
+    public List<Product> getProducts() {
+        return products;
     }
 
-    public void setItems(List<Item> items) {
-        this.items = items;
+    public void setProducts(List<Product> products) {
+        this.products = products;
     }
 }
