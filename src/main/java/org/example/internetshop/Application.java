@@ -64,6 +64,6 @@ public class Application {
         orderService.completeOrder(shoppingCartService.getAllProducts(vladShoppingCart), vlad);
         orderService.getUserOrders(vlad).forEach(System.out::println);
 
-        shoppingCartService.clear(vladShoppingCart);
+        System.out.println(shoppingCartService.getByUserId(vlad.getId()));
     }
 }
