@@ -1,12 +1,16 @@
 package org.example.internetshop.service.impl;
 
 import org.example.internetshop.dao.OrderDao;
+import org.example.internetshop.dao.ShoppingCartDao;
 import org.example.internetshop.lib.Inject;
 import org.example.internetshop.lib.Service;
 import org.example.internetshop.model.Order;
+import org.example.internetshop.model.Product;
 import org.example.internetshop.model.ShoppingCart;
 import org.example.internetshop.model.User;
 import org.example.internetshop.service.OrderService;
+import org.example.internetshop.service.ShoppingCartService;
+
 import java.util.List;
 
 @Service
@@ -26,8 +30,9 @@ public class OrderServiceImpl implements OrderService  {
     }
 
     @Override
-    public Order completeOrder(ShoppingCart shoppingCart) {
-        return orderDao.create(shoppingCart);
+    public Order completeOrder(List<Product> products, User user) {
+        Order order = new Order(user, products);
+        return orderDao.create(order);
     }
 
     @Override

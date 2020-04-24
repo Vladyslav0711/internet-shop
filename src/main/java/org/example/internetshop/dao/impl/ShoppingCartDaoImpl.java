@@ -13,9 +13,6 @@ public class ShoppingCartDaoImpl implements ShoppingCartDao {
 
     @Override
     public ShoppingCart create(ShoppingCart shoppingCart) {
-        if(Storage.shoppingCarts.contains(shoppingCart)){
-            return shoppingCart;
-        }
         Storage.addShoppingCart(shoppingCart);
         return shoppingCart;
     }

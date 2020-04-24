@@ -14,8 +14,7 @@ import java.util.stream.IntStream;
 @Dao
 public class OrderDaoImpl implements OrderDao {
     @Override
-    public Order create(ShoppingCart shoppingCart) {
-        Order order = new Order(shoppingCart.getUser(), shoppingCart.getProducts());
+    public Order create(Order order) {
         Storage.addOrder(order);
         return order;
     }

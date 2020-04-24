@@ -14,7 +14,6 @@ import java.util.ArrayList;
 
 public class Application {
     private static Injector injector = Injector.getInstance("org.example.internetshop");
-    private static Injector injector2 = Injector.getInstance("org.example.internetshop");
 
     public static void main(String[] args) {
         ProductService productService = (ProductService) injector.getInstance(ProductService.class);
@@ -62,7 +61,7 @@ public class Application {
 
         OrderService orderService = (OrderService) injector.getInstance(OrderService.class);
 
-        orderService.completeOrder(vladShoppingCart);
+        orderService.completeOrder(shoppingCartService.getAllProducts(vladShoppingCart), vlad);
         orderService.getUserOrders(vlad).forEach(System.out::println);
 
         shoppingCartService.clear(vladShoppingCart);
