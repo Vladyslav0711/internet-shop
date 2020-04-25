@@ -1,17 +1,8 @@
 package org.example.internetshop.service;
 
 import org.example.internetshop.model.User;
-import java.util.List;
 
-public interface UserService {
+public interface UserService extends GenericService<User, Long> {
 
-    User create(User user);
 
-    User get(Long id);
-
-    List<User> getAll();
-
-    User update(User user);
-
-    boolean delete(Long id);
 }
