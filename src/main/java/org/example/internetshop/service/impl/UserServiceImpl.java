@@ -1,11 +1,11 @@
 package org.example.internetshop.service.impl;
 
+import java.util.List;
 import org.example.internetshop.dao.UserDao;
 import org.example.internetshop.lib.Inject;
 import org.example.internetshop.lib.Service;
 import org.example.internetshop.model.User;
 import org.example.internetshop.service.UserService;
-import java.util.List;
 
 @Service
 public class UserServiceImpl implements UserService {

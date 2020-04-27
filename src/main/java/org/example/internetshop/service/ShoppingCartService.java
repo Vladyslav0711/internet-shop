@@ -1,8 +1,8 @@
 package org.example.internetshop.service;
 
+import java.util.List;
 import org.example.internetshop.model.Product;
 import org.example.internetshop.model.ShoppingCart;
-import java.util.List;
 
 public interface ShoppingCartService {
 

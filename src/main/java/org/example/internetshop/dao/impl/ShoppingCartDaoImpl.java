@@ -1,12 +1,12 @@
 package org.example.internetshop.dao.impl;
 
+import java.util.List;
+import java.util.Optional;
+import java.util.stream.IntStream;
 import org.example.internetshop.dao.ShoppingCartDao;
 import org.example.internetshop.dao.Storage;
 import org.example.internetshop.lib.Dao;
 import org.example.internetshop.model.ShoppingCart;
-import java.util.List;
-import java.util.Optional;
-import java.util.stream.IntStream;
 
 @Dao
 public class ShoppingCartDaoImpl implements ShoppingCartDao {
