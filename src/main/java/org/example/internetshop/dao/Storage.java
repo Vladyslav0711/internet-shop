@@ -3,8 +3,8 @@ package org.example.internetshop.dao;
 import java.util.ArrayList;
 import java.util.List;
 import org.example.internetshop.model.Order;
-import org.example.internetshop.model.ShoppingCart;
 import org.example.internetshop.model.Product;
+import org.example.internetshop.model.ShoppingCart;
 import org.example.internetshop.model.User;
 
 public class Storage {
@@ -21,14 +21,17 @@ public class Storage {
         product.setId(++idProduct);
         products.add(product);
     }
+
     public static void addShoppingCart(ShoppingCart shoppingCart) {
         shoppingCart.setId(++idShoppingCart);
         shoppingCarts.add(shoppingCart);
     }
+
     public static void addOrder(Order order) {
         order.setId(++idOrder);
         orders.add(order);
     }
+
     public static void addUser(User user) {
         user.setId(++idUser);
         users.add(user);

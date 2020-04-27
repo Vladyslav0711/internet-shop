@@ -1,12 +1,12 @@
 package org.example.internetshop.service.impl;
 
+import java.util.List;
 import org.example.internetshop.dao.ShoppingCartDao;
 import org.example.internetshop.lib.Inject;
 import org.example.internetshop.lib.Service;
 import org.example.internetshop.model.Product;
 import org.example.internetshop.model.ShoppingCart;
 import org.example.internetshop.service.ShoppingCartService;
-import java.util.List;
 
 @Service
 public class ShoppingCartServiceImpl implements ShoppingCartService {
