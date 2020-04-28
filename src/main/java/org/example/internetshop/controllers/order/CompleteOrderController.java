@@ -1,4 +1,4 @@
-package org.example.internetshop.controllers;
+package org.example.internetshop.controllers.order;
 
 import org.example.internetshop.lib.Injector;
 import org.example.internetshop.model.Order;
@@ -31,6 +31,7 @@ public class CompleteOrderController extends HttpServlet {
         ShoppingCart shoppingCart = shoppingCartService.getByUserId(USER_ID);
         List<Product> products = shoppingCartService.getAllProducts(shoppingCart);
         User user = userService.get(USER_ID);
-        Order order = orderService.completeOrder(products, user);
+        orderService.completeOrder(products, user);
+        resp.sendRedirect(req.getContextPath() + "/cart");
     }
 }

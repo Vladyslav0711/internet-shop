@@ -1,4 +1,4 @@
-package org.example.internetshop.controllers;
+package org.example.internetshop.controllers.shopping_cart;
 
 import org.example.internetshop.lib.Injector;
 import org.example.internetshop.model.Product;

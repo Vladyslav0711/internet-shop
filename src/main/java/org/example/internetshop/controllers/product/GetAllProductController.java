@@ -1,4 +1,4 @@
-package org.example.internetshop.controllers;
+package org.example.internetshop.controllers.product;
 
 import java.io.IOException;
 import java.util.List;
@@ -8,19 +8,18 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.example.internetshop.lib.Injector;
 import org.example.internetshop.model.Product;
-import org.example.internetshop.service.ShoppingCartService;
+import org.example.internetshop.service.ProductService;
 
-public class ShoppingCartController extends HttpServlet {
-    public static final Long USER_ID = 1L;
+public class GetAllProductController extends HttpServlet {
     private static final Injector INJECTOR = Injector.getInstance("org.example.internetshop");
-    private ShoppingCartService shoppingCartService =
-            (ShoppingCartService) INJECTOR.getInstance(ShoppingCartService.class);
+    private ProductService productService =
+            (ProductService) INJECTOR.getInstance(ProductService.class);
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
-        List<Product> products = shoppingCartService.getByUserId(USER_ID).getProducts();
+        List<Product> products = productService.getAll();
         req.setAttribute("products", products);
-        req.getRequestDispatcher("/WEB-INF/views/cart/shoppingCart.jsp").forward(req, resp);
+        req.getRequestDispatcher("/WEB-INF/views/products/all.jsp").forward(req, resp);
     }
 }

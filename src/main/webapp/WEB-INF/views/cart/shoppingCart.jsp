@@ -12,6 +12,7 @@
         <th>Price</th>
         <th>Delete</th>
     </tr>
+
     <c:forEach var="product" items="${products}">
         <tr>
             <td>
@@ -27,8 +28,9 @@
         </tr>
     </c:forEach>
 </table>
-<form action="">
-    <button>Complete order</button>
+<p>${message}</p>
+<form action="${pageContext.request.contextPath}/orders/complete" method="post">
+    <button type="submit">Complete order</button>
 </form>
 
 </body>
