@@ -11,4 +11,67 @@
         <servlet-name>index</servlet-name>
         <url-pattern>/index</url-pattern>
     </servlet-mapping>
+
+    <servlet>
+        <servlet-name>allUsers</servlet-name>
+        <servlet-class>org.example.internetshop.controllers.UserController</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>allUsers</servlet-name>
+        <url-pattern>/users/all</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>registration</servlet-name>
+        <servlet-class>org.example.internetshop.controllers.RegistrationController</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>registration</servlet-name>
+        <url-pattern>/registration</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>deleteUser</servlet-name>
+        <servlet-class>org.example.internetshop.controllers.DeleteUserController</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>deleteUser</servlet-name>
+        <url-pattern>/deleteUser</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>addProduct</servlet-name>
+        <servlet-class>org.example.internetshop.controllers.AddProductController</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>addProduct</servlet-name>
+        <url-pattern>/products/add</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>allProduct</servlet-name>
+        <servlet-class>org.example.internetshop.controllers.ProductController</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>allProduct</servlet-name>
+        <url-pattern>/products/all</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>shoppingCart</servlet-name>
+        <servlet-class>org.example.internetshop.controllers.ShoppingCartController</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>shoppingCart</servlet-name>
+        <url-pattern>/cart</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>addProductToCart</servlet-name>
+        <servlet-class>org.example.internetshop.controllers.AddProductToCartController</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>addProductToCart</servlet-name>
+        <url-pattern>/cart/add</url-pattern>
+    </servlet-mapping>
 </web-app>
