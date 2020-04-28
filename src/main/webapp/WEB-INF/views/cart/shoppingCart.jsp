@@ -10,7 +10,7 @@
         <th>ID</th>
         <th>Name</th>
         <th>Price</th>
-
+        <th>Delete</th>
     </tr>
     <c:forEach var="product" items="${products}">
         <tr>
@@ -23,9 +23,13 @@
             <td>
                 <c:out value="${product.price}"/>
             </td>
+            <td><a href="${pageContext.request.contextPath}/cart/delete?product_id=${product.id}">Delete</a></td>
         </tr>
     </c:forEach>
 </table>
+<form action="">
+    <button>Complete order</button>
+</form>
 
 </body>
 </html>
