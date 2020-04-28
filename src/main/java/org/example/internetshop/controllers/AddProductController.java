@@ -10,9 +10,9 @@ import org.example.internetshop.model.Product;
 import org.example.internetshop.service.ProductService;
 
 public class AddProductController extends HttpServlet {
-    private static Injector injector = Injector.getInstance("org.example.internetshop");
+    private static final Injector INJECTOR = Injector.getInstance("org.example.internetshop");
     ProductService productService =
-            (ProductService) injector.getInstance(ProductService.class);
+            (ProductService) INJECTOR.getInstance(ProductService.class);
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp)

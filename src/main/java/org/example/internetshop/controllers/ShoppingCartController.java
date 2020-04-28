@@ -12,9 +12,9 @@ import org.example.internetshop.service.ShoppingCartService;
 
 public class ShoppingCartController extends HttpServlet {
     public static final Long USER_ID = 1L;
-    private static Injector injector = Injector.getInstance("org.example.internetshop");
+    private static final Injector INJECTOR = Injector.getInstance("org.example.internetshop");
     ShoppingCartService shoppingCartService =
-            (ShoppingCartService) injector.getInstance(ShoppingCartService.class);
+            (ShoppingCartService) INJECTOR.getInstance(ShoppingCartService.class);
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp)

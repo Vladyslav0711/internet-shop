@@ -12,11 +12,11 @@ import org.example.internetshop.service.ShoppingCartService;
 import org.example.internetshop.service.UserService;
 
 public class RegistrationController extends HttpServlet {
-    private static Injector injector = Injector.getInstance("org.example.internetshop");
+    private static final Injector INJECTOR = Injector.getInstance("org.example.internetshop");
     UserService userService =
-            (UserService) injector.getInstance(UserService.class);
+            (UserService) INJECTOR.getInstance(UserService.class);
     ShoppingCartService shoppingCartService =
-            (ShoppingCartService) injector.getInstance(ShoppingCartService.class);
+            (ShoppingCartService) INJECTOR.getInstance(ShoppingCartService.class);
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp)

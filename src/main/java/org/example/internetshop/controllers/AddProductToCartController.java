@@ -13,13 +13,13 @@ import org.example.internetshop.service.UserService;
 
 public class AddProductToCartController extends HttpServlet {
     public static final Long USER_ID = 1L;
-    private static Injector injector = Injector.getInstance("org.example.internetshop");
+    private static final Injector INJECTOR = Injector.getInstance("org.example.internetshop");
     UserService userService =
-            (UserService) injector.getInstance(UserService.class);
+            (UserService) INJECTOR.getInstance(UserService.class);
     ProductService productService =
-            (ProductService) injector.getInstance(ProductService.class);
+            (ProductService) INJECTOR.getInstance(ProductService.class);
     ShoppingCartService shoppingCartService =
-            (ShoppingCartService) injector.getInstance(ShoppingCartService.class);
+            (ShoppingCartService) INJECTOR.getInstance(ShoppingCartService.class);
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp)
