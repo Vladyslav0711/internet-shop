@@ -5,12 +5,23 @@ import java.util.Objects;
 public class User {
     private Long id;
     private String name;
+    private String surname;
     private String login;
     private String password;
 
-    public User(String name, String login) {
-        this.name = name;
+    public User(String name, String surname, String login, String password) {
         this.login = login;
+        this.name = name;
+        this.surname = surname;
+        this.password = password;
+    }
+
+    public String getSurname() {
+        return surname;
+    }
+
+    public void setSurname(String surname) {
+        this.surname = surname;
     }
 
     public Long getId() {
