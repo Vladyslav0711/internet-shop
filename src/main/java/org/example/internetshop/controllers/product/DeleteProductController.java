@@ -14,7 +14,8 @@ public class DeleteProductController extends HttpServlet {
             (ProductService) INJECTOR.getInstance(ProductService.class);
 
     @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp)
+            throws ServletException, IOException {
         String productId = req.getParameter("product_id");
         productService.delete(Long.valueOf(productId));
         resp.sendRedirect(req.getContextPath() + "/products/edit");

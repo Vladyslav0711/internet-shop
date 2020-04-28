@@ -50,7 +50,7 @@
 
     <servlet>
         <servlet-name>shoppingCart</servlet-name>
-        <servlet-class>org.example.internetshop.controllers.shopping_cart.ShoppingCartController</servlet-class>
+        <servlet-class>org.example.internetshop.controllers.cart.ShoppingCartController</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>shoppingCart</servlet-name>
@@ -59,7 +59,7 @@
 
     <servlet>
         <servlet-name>addProductToCart</servlet-name>
-        <servlet-class>org.example.internetshop.controllers.shopping_cart.AddProductToCartController</servlet-class>
+        <servlet-class>org.example.internetshop.controllers.cart.AddProductToCartController</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>addProductToCart</servlet-name>
@@ -68,7 +68,7 @@
 
     <servlet>
         <servlet-name>deleteProductFromCart</servlet-name>
-        <servlet-class>org.example.internetshop.controllers.shopping_cart.DeleteProductFromCartController</servlet-class>
+        <servlet-class>org.example.internetshop.controllers.cart.DeleteProductFromCartController</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>deleteProductFromCart</servlet-name>

@@ -1,15 +1,14 @@
 package org.example.internetshop.controllers.product;
 
-import org.example.internetshop.lib.Injector;
-import org.example.internetshop.model.Product;
-import org.example.internetshop.service.ProductService;
-
+import java.io.IOException;
+import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
-import java.util.List;
+import org.example.internetshop.lib.Injector;
+import org.example.internetshop.model.Product;
+import org.example.internetshop.service.ProductService;
 
 public class EditProductListController extends HttpServlet {
     private static final Injector INJECTOR = Injector.getInstance("org.example.internetshop");

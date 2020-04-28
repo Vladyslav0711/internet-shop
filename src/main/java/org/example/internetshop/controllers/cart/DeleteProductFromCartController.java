@@ -1,16 +1,15 @@
-package org.example.internetshop.controllers.shopping_cart;
+package org.example.internetshop.controllers.cart;
 
+import java.io.IOException;
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import org.example.internetshop.lib.Injector;
 import org.example.internetshop.model.Product;
 import org.example.internetshop.model.ShoppingCart;
 import org.example.internetshop.service.ProductService;
 import org.example.internetshop.service.ShoppingCartService;
-
-import javax.servlet.ServletException;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
 
 public class DeleteProductFromCartController extends HttpServlet {
     public static final Long USER_ID = 1L;
