@@ -10,17 +10,15 @@ import org.example.internetshop.lib.Injector;
 import org.example.internetshop.model.User;
 import org.example.internetshop.service.UserService;
 
-public class UserController extends HttpServlet {
+public class GetAllUsersController extends HttpServlet {
     private static final Injector INJECTOR = Injector.getInstance("org.example.internetshop");
-    UserService userService =
+    private UserService userService =
             (UserService) INJECTOR.getInstance(UserService.class);
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
-
         List<User> allUsers = userService.getAll();
-
         req.setAttribute("users", allUsers);
         req.getRequestDispatcher("/WEB-INF/views/users/all.jsp").forward(req, resp);
     }

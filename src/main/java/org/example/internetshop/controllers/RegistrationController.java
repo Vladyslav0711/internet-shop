@@ -13,9 +13,9 @@ import org.example.internetshop.service.UserService;
 
 public class RegistrationController extends HttpServlet {
     private static final Injector INJECTOR = Injector.getInstance("org.example.internetshop");
-    UserService userService =
+    private UserService userService =
             (UserService) INJECTOR.getInstance(UserService.class);
-    ShoppingCartService shoppingCartService =
+    private ShoppingCartService shoppingCartService =
             (ShoppingCartService) INJECTOR.getInstance(ShoppingCartService.class);
 
     @Override
@@ -38,7 +38,7 @@ public class RegistrationController extends HttpServlet {
             shoppingCartService.create(shoppingCart);
             resp.sendRedirect(req.getContextPath() + "/users/all");
         } else {
-            String issue = "Passwords is not equals";
+            String issue = "Password and repeat password are not equals";
             req.setAttribute("issue", issue);
             req.setAttribute("savedLogin", login);
             req.setAttribute("savedName", name);

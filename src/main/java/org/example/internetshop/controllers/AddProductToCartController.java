@@ -14,11 +14,11 @@ import org.example.internetshop.service.UserService;
 public class AddProductToCartController extends HttpServlet {
     public static final Long USER_ID = 1L;
     private static final Injector INJECTOR = Injector.getInstance("org.example.internetshop");
-    UserService userService =
+    private UserService userService =
             (UserService) INJECTOR.getInstance(UserService.class);
-    ProductService productService =
+    private ProductService productService =
             (ProductService) INJECTOR.getInstance(ProductService.class);
-    ShoppingCartService shoppingCartService =
+    private ShoppingCartService shoppingCartService =
             (ShoppingCartService) INJECTOR.getInstance(ShoppingCartService.class);
 
     @Override

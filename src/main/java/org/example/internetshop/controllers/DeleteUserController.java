@@ -10,7 +10,7 @@ import org.example.internetshop.service.UserService;
 
 public class DeleteUserController extends HttpServlet {
     private static final Injector INJECTOR = Injector.getInstance("org.example.internetshop");
-    UserService userService =
+    private UserService userService =
             (UserService) INJECTOR.getInstance(UserService.class);
 
     @Override

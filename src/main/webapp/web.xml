@@ -14,7 +14,7 @@
 
     <servlet>
         <servlet-name>allUsers</servlet-name>
-        <servlet-class>org.example.internetshop.controllers.UserController</servlet-class>
+        <servlet-class>org.example.internetshop.controllers.GetAllUsersController</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>allUsers</servlet-name>
@@ -50,7 +50,7 @@
 
     <servlet>
         <servlet-name>allProduct</servlet-name>
-        <servlet-class>org.example.internetshop.controllers.ProductController</servlet-class>
+        <servlet-class>org.example.internetshop.controllers.GetAllProductController</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>allProduct</servlet-name>
