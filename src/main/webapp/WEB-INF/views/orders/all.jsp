@@ -5,16 +5,18 @@
     <title>Orders</title>
 </head>
 <body>
-    <ul>
-        <c:forEach var="order" items="${orders}">
-        <li>
-            <a href="${pageContext.request.contextPath}/orders/info?order_id=${order.id}">Order №${order.id}</a>
-            <form method="get" action="${pageContext.request.contextPath}/orders/delete">
-                <input type="hidden" value="${order.id}" name="order_id">
-                <button type="submit">X</button>
-            </form>
-        </li>
-        </c:forEach>
-    </ul>
+<jsp:include page="../navbar.jsp" />
+    <div class="container mt-5 pt-5">
+        <table class="table">
+            <tbody>
+            <c:forEach var="order" items="${orders}">
+                <tr>
+                    <td><h3><a class="text-info" href="${pageContext.request.contextPath}/orders/info?order_id=${order.id}">Order №${order.id}</a></h3></td>
+                    <td><button class="btn btn-danger" onclick="window.location.href='${pageContext.request.contextPath}/orders/delete?order_id=${order.id}'">X</button></td>
+                </tr>
+            </c:forEach>
+            </tbody>
+        </table>
+    </div>
 </body>
 </html>
