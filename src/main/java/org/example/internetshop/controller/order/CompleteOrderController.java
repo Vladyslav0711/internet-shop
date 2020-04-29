@@ -12,7 +12,6 @@ import org.example.internetshop.model.ShoppingCart;
 import org.example.internetshop.model.User;
 import org.example.internetshop.service.OrderService;
 import org.example.internetshop.service.ShoppingCartService;
-import org.example.internetshop.service.UserService;
 
 public class CompleteOrderController extends HttpServlet {
     private static final Long USER_ID = 1L;
