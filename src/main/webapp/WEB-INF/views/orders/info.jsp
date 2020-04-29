@@ -5,6 +5,8 @@
     <title>Order info</title>
 </head>
 <body>
+<jsp:include page="../navbar.jsp" />
+
     <h1>Order №${order.id} info</h1>
     <ul>
         <c:forEach var="product" items="${products}">

@@ -2,36 +2,47 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
+    <style type="text/css">
+        <%@include file="../bootstrap/css/bootstrap.min.css" %>
+        <%@include file="../css/styles.css" %>
+    </style>
     <title>Shopping cart</title>
 </head>
 <body>
-<table>
-    <tr>
-        <th>ID</th>
-        <th>Name</th>
-        <th>Price</th>
-        <th>Delete</th>
-    </tr>
-
-    <c:forEach var="product" items="${products}">
+<jsp:include page="../navbar.jsp" />
+<div class="container mt-5 pt-5">
+    <table border="1" class="table text-center table-hover">
+        <thead>
         <tr>
-            <td>
-                <c:out value="${product.id}"/>
-            </td>
-            <td>
-                <c:out value="${product.name}"/>
-            </td>
-            <td>
-                <c:out value="${product.price}"/>
-            </td>
-            <td><a href="${pageContext.request.contextPath}/cart/delete?product_id=${product.id}">Delete</a></td>
+            <th scope="col">ID</th>
+            <th scope="col">Name</th>
+            <th scope="col">Price</th>
+            <th scope="col">Delete</th>
         </tr>
-    </c:forEach>
-</table>
+        </thead>
+        <tbody>
+        <c:forEach var="product" items="${products}">
+            <tr>
+                <td>
+                    <c:out value="${product.id}"/>
+                </td>
+                <td>
+                    <c:out value="${product.name}"/>
+                </td>
+                <td>
+                    <c:out value = "${product.price}"/>
+                </td>
+                <td class="td-hover" onclick="window.location.href='${pageContext.request.contextPath}/cart/delete?product_id=${product.id}'" >
+                    X
+                </td>
+            </tr>
+        </c:forEach>
+        </tbody>
+    </table>
 <p>${message}</p>
 <form action="${pageContext.request.contextPath}/orders/complete" method="post">
-    <button type="submit">Complete order</button>
+    <button type="submit" class="btn btn-primary">Complete order</button>
 </form>
-
+</div>
 </body>
 </html>
