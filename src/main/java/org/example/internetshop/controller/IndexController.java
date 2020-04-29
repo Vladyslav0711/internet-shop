@@ -1,4 +1,4 @@
-package org.example.internetshop.controllers;
+package org.example.internetshop.controller;
 
 import java.io.IOException;
 import javax.servlet.ServletException;

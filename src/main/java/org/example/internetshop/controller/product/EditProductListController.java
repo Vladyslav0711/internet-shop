@@ -1,4 +1,4 @@
-package org.example.internetshop.controllers.product;
+package org.example.internetshop.controller.product;
 
 import java.io.IOException;
 import java.util.List;

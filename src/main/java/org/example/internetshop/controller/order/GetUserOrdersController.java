@@ -1,4 +1,4 @@
-package org.example.internetshop.controllers.order;
+package org.example.internetshop.controller.order;
 
 import java.io.IOException;
 import java.util.List;
@@ -8,22 +8,24 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.example.internetshop.lib.Injector;
 import org.example.internetshop.model.Order;
-import org.example.internetshop.model.Product;
+import org.example.internetshop.model.User;
 import org.example.internetshop.service.OrderService;
+import org.example.internetshop.service.UserService;
 
-public class GetOrderInfoController extends HttpServlet {
+public class GetUserOrdersController extends HttpServlet {
+    private static final Long USER_ID = 1L;
     private static final Injector INJECTOR = Injector.getInstance("org.example.internetshop");
     private OrderService orderService =
             (OrderService) INJECTOR.getInstance(OrderService.class);
+    private UserService userService =
+            (UserService) INJECTOR.getInstance(UserService.class);
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
-        String orderId = req.getParameter("order_id");
-        Order order = orderService.get(Long.valueOf(orderId));
-        List<Product> products = orderService.get(Long.valueOf(orderId)).getProducts();
-        req.setAttribute("order", order);
-        req.setAttribute("products", products);
-        req.getRequestDispatcher("/WEB-INF/views/orders/info.jsp").forward(req, resp);
+        User user = userService.get(USER_ID);
+        List<Order> orders = orderService.getUserOrders(user);
+        req.setAttribute("orders", orders);
+        req.getRequestDispatcher("/WEB-INF/views/orders/all.jsp").forward(req, resp);
     }
 }

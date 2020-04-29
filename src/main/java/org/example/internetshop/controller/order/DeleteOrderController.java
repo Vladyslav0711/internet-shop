@@ -1,4 +1,4 @@
-package org.example.internetshop.controllers.user;
+package org.example.internetshop.controller.order;
 
 import java.io.IOException;
 import javax.servlet.ServletException;
@@ -6,18 +6,18 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.example.internetshop.lib.Injector;
-import org.example.internetshop.service.UserService;
+import org.example.internetshop.service.OrderService;
 
-public class DeleteUserController extends HttpServlet {
+public class DeleteOrderController extends HttpServlet {
     private static final Injector INJECTOR = Injector.getInstance("org.example.internetshop");
-    private UserService userService =
-            (UserService) INJECTOR.getInstance(UserService.class);
+    private OrderService orderService =
+            (OrderService) INJECTOR.getInstance(OrderService.class);
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
-        String userId = req.getParameter("user_id");
-        userService.delete(Long.valueOf(userId));
-        resp.sendRedirect(req.getContextPath() + "/users/all");
+        String orderId = req.getParameter("order_id");
+        orderService.delete(Long.valueOf(orderId));
+        resp.sendRedirect(req.getContextPath() + "/orders");
     }
 }
