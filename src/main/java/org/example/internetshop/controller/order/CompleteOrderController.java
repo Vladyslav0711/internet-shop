@@ -6,6 +6,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import org.example.internetshop.lib.Injector;
 import org.example.internetshop.model.Product;
 import org.example.internetshop.model.ShoppingCart;
@@ -14,7 +15,6 @@ import org.example.internetshop.service.OrderService;
 import org.example.internetshop.service.ShoppingCartService;
 
 public class CompleteOrderController extends HttpServlet {
-    private static final Long USER_ID = 1L;
     private static final Injector INJECTOR = Injector.getInstance("org.example.internetshop");
     private ShoppingCartService shoppingCartService =
             (ShoppingCartService) INJECTOR.getInstance(ShoppingCartService.class);
@@ -24,7 +24,9 @@ public class CompleteOrderController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
-        ShoppingCart shoppingCart = shoppingCartService.getByUserId(USER_ID);
+        HttpSession session = req.getSession();
+        Long userId = (Long) session.getAttribute("user_id");
+        ShoppingCart shoppingCart = shoppingCartService.getByUserId(userId);
         List<Product> products = shoppingCartService.getAllProducts(shoppingCart);
         User user = shoppingCart.getUser();
         orderService.completeOrder(products, user);
