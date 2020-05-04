@@ -49,11 +49,11 @@
     </servlet-mapping>
 
     <servlet>
-        <servlet-name>shoppingCart</servlet-name>
-        <servlet-class>org.example.internetshop.controller.cart.ShoppingCartController</servlet-class>
+        <servlet-name>getShoppingCart</servlet-name>
+        <servlet-class>org.example.internetshop.controller.cart.GetShoppingCartController</servlet-class>
     </servlet>
     <servlet-mapping>
-        <servlet-name>shoppingCart</servlet-name>
+        <servlet-name>getShoppingCart</servlet-name>
         <url-pattern>/cart</url-pattern>
     </servlet-mapping>
 

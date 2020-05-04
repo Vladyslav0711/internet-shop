@@ -11,7 +11,7 @@ import org.example.internetshop.lib.Injector;
 import org.example.internetshop.model.Product;
 import org.example.internetshop.service.ShoppingCartService;
 
-public class ShoppingCartController extends HttpServlet {
+public class GetShoppingCartController extends HttpServlet {
     private static final Injector INJECTOR = Injector.getInstance("org.example.internetshop");
     private ShoppingCartService shoppingCartService =
             (ShoppingCartService) INJECTOR.getInstance(ShoppingCartService.class);

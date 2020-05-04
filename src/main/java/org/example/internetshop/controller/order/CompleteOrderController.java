@@ -27,7 +27,7 @@ public class CompleteOrderController extends HttpServlet {
         HttpSession session = req.getSession();
         Long userId = (Long) session.getAttribute("user_id");
         ShoppingCart shoppingCart = shoppingCartService.getByUserId(userId);
-        List<Product> products = shoppingCartService.getAllProducts(shoppingCart);
+        List<Product> products = shoppingCart.getProducts();
         User user = shoppingCart.getUser();
         orderService.completeOrder(products, user);
         resp.sendRedirect(req.getContextPath() + "/cart");
