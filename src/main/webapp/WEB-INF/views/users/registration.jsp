@@ -12,6 +12,8 @@
     <title>Registration</title>
 </head>
 <body>
+
+<a class="btn btn-block btn-outline-primary" href="/login">Sign in</a>
 <h1 class="text-center mt-3">Registration</h1>
 
 <div class="row justify-content-center">
