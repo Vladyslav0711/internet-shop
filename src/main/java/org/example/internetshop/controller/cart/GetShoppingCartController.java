@@ -6,12 +6,12 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import org.example.internetshop.lib.Injector;
 import org.example.internetshop.model.Product;
 import org.example.internetshop.service.ShoppingCartService;
 
-public class ShoppingCartController extends HttpServlet {
-    private static final Long USER_ID = 1L;
+public class GetShoppingCartController extends HttpServlet {
     private static final Injector INJECTOR = Injector.getInstance("org.example.internetshop");
     private ShoppingCartService shoppingCartService =
             (ShoppingCartService) INJECTOR.getInstance(ShoppingCartService.class);
@@ -19,7 +19,9 @@ public class ShoppingCartController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
-        List<Product> products = shoppingCartService.getByUserId(USER_ID).getProducts();
+        HttpSession session = req.getSession();
+        Long userId = (Long) session.getAttribute("user_id");
+        List<Product> products = shoppingCartService.getByUserId(userId).getProducts();
         req.setAttribute("products", products);
         if (products.size() == 0) {
             req.setAttribute("message", "Your cart is empty.");
