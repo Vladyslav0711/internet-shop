@@ -1,7 +1,7 @@
 package org.example.internetshop.model;
 
 public class Role {
-    Long id;
+    private Long id;
     private RoleName roleName;
 
     public Role(RoleName roleName) {
