@@ -8,7 +8,6 @@ import org.example.internetshop.dao.Storage;
 import org.example.internetshop.lib.Dao;
 import org.example.internetshop.model.Product;
 
-@Dao
 public class ProductDaoImpl implements ProductDao {
 
     @Override
