@@ -1,6 +1,7 @@
 package org.example.internetshop.controller.product;
 
 import java.io.IOException;
+import java.math.BigDecimal;
 import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -28,7 +29,7 @@ public class EditProductListController extends HttpServlet {
             throws ServletException, IOException {
         String name = req.getParameter("name");
         String price = req.getParameter("price");
-        productService.create(new Product(name, Double.valueOf(price)));
+        productService.create(new Product(name, BigDecimal.valueOf(Double.parseDouble(price))));
         req.setAttribute("message", "Successfully added");
         this.doGet(req, resp);
     }

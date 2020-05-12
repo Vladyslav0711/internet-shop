@@ -1,0 +1,7 @@
+CREATE SCHEMA IF NOT EXISTS internet_shop DEFAULT CHARACTER SET utf8 ;
+
+CREATE TABLE internet_shop.products (
+  id INT NOT NULL AUTO_INCREMENT,
+  product_name VARCHAR(225) NOT NULL,
+  price BIGINT(11) NOT NULL,
+  PRIMARY KEY (id));

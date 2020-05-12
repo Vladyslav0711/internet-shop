@@ -5,10 +5,8 @@ import java.util.Optional;
 import java.util.stream.IntStream;
 import org.example.internetshop.dao.ProductDao;
 import org.example.internetshop.dao.Storage;
-import org.example.internetshop.lib.Dao;
 import org.example.internetshop.model.Product;
 
-@Dao
 public class ProductDaoImpl implements ProductDao {
 
     @Override
