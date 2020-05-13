@@ -6,6 +6,16 @@ public class Role {
 
     public Role(RoleName roleName) {
         this.roleName = roleName;
+        switch (roleName) {
+            case USER:
+                id = 1L;
+                break;
+            case ADMIN:
+                id = 2L;
+                break;
+            default:
+                break;
+        }
     }
 
     public static Role of(String roleName) {
