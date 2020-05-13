@@ -101,7 +101,7 @@ public class ProductDaoJdbcImpl implements ProductDao {
         }
     }
 
-    public Product getProductFromResultSet(ResultSet resultSet) throws SQLException {
+    private Product getProductFromResultSet(ResultSet resultSet) throws SQLException {
         Long id = resultSet.getLong("id");
         String name = resultSet.getString("product_name");
         BigDecimal price = resultSet.getBigDecimal("price");
