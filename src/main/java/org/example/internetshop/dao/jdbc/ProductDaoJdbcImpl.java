@@ -107,44 +107,6 @@ public class ProductDaoJdbcImpl implements ProductDao {
         }
     }
 
-    @Override
-    public List<Product> getProductsByCart(Long cartId) {
-        String query = "SELECT id, product_name, price FROM shopping_carts_products scp"
-                + " JOIN products p ON scp.product_id = p.id"
-                + " WHERE scp.cart_id = ?;";
-        List<Product> products = new ArrayList<>();
-        try (Connection connection = ConnectionUtil.getConnection()) {
-            setProducts(query, products, connection, cartId);
-            return products;
-        } catch (SQLException e) {
-            throw new DataProcessingException("Getting products from cart failed", e);
-        }
-    }
-
-    @Override
-    public List<Product> getProductByOrder(Long orderId) {
-        String query = "SELECT id, product_name, price FROM orders_products op"
-                + " JOIN products p ON op.product_id = p.id"
-                + " WHERE op.order_id = ?;";
-        List<Product> products = new ArrayList<>();
-        try (Connection connection = ConnectionUtil.getConnection()) {
-            setProducts(query, products, connection, orderId);
-            return products;
-        } catch (SQLException e) {
-            throw new DataProcessingException("Getting products from order failed", e);
-        }
-    }
-
-    public void setProducts(String query, List<Product> products, Connection connection, Long id)
-            throws SQLException {
-        PreparedStatement statement = connection.prepareStatement(query);
-        statement.setLong(1, id);
-        ResultSet resultSet = statement.executeQuery();
-        while (resultSet.next()) {
-            products.add(getProductFromResultSet(resultSet));
-        }
-    }
-
     private Product getProductFromResultSet(ResultSet resultSet) throws SQLException {
         Long id = resultSet.getLong("id");
         String name = resultSet.getString("product_name");

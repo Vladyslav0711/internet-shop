@@ -29,9 +29,8 @@ public class UserDaoJdbcImpl implements UserDao {
             ResultSet resultSet = statement.executeQuery();
             if (resultSet.next()) {
                 return Optional.of(getUserFromResultSet(resultSet));
-            } else {
-                return Optional.empty();
             }
+            return Optional.empty();
         } catch (SQLException e) {
             throw new DataProcessingException("Finding by login failed", e);
         }
@@ -69,9 +68,8 @@ public class UserDaoJdbcImpl implements UserDao {
             ResultSet resultSet = statement.executeQuery();
             if (resultSet.next()) {
                 return Optional.of(getUserFromResultSet(resultSet));
-            } else {
-                return Optional.empty();
             }
+            return Optional.empty();
         } catch (SQLException e) {
             throw new DataProcessingException("Getting user failed", e);
         }
@@ -96,8 +94,7 @@ public class UserDaoJdbcImpl implements UserDao {
             query = "DELETE FROM users WHERE id=?;";
             clearUserInfo(query, connection, user.getId());
             setUserRoles(user);
-            ResultSet resultSet = statement.getResultSet();
-            return getUserFromResultSet(resultSet);
+            return user;
         } catch (SQLException e) {
             throw new DataProcessingException("Update user with id = "
                     + user.getId() + "failed", e);
@@ -151,6 +148,7 @@ public class UserDaoJdbcImpl implements UserDao {
         try (Connection connection = ConnectionUtil.getConnection()) {
             PreparedStatement statement = connection.prepareStatement(query);
             for (Role role : user.getRoles()) {
+                role.setId(getRoleIdByName(role.getRoleName(), connection));
                 statement.setLong(1, user.getId());
                 statement.setLong(2, role.getId());
                 statement.executeUpdate();
@@ -183,5 +181,14 @@ public class UserDaoJdbcImpl implements UserDao {
         PreparedStatement statement = connection.prepareStatement(query);
         statement.setLong(1, id);
         return statement.executeUpdate() != 0;
+    }
+
+    private Long getRoleIdByName(Role.RoleName name, Connection connection) throws SQLException {
+        String query = "SELECT role_id FROM roles WHERE role_name=?";
+        PreparedStatement preparedStatement = connection.prepareStatement(query);
+        preparedStatement.setString(1, name.toString());
+        ResultSet resultSet = preparedStatement.executeQuery();
+        resultSet.next();
+        return resultSet.getLong("role_id");
     }
 }

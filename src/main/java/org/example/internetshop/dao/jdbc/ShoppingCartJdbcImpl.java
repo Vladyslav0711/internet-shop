@@ -1,5 +1,6 @@
 package org.example.internetshop.dao.jdbc;
 
+import java.math.BigDecimal;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -8,20 +9,15 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-import org.example.internetshop.dao.ProductDao;
 import org.example.internetshop.dao.ShoppingCartDao;
 import org.example.internetshop.exception.DataProcessingException;
 import org.example.internetshop.lib.Dao;
-import org.example.internetshop.lib.Inject;
 import org.example.internetshop.model.Product;
 import org.example.internetshop.model.ShoppingCart;
 import org.example.internetshop.utill.ConnectionUtil;
 
 @Dao
 public class ShoppingCartJdbcImpl implements ShoppingCartDao {
-
-    @Inject
-    ProductDao productDao;
 
     @Override
     public ShoppingCart create(ShoppingCart shoppingCart) {
@@ -51,9 +47,8 @@ public class ShoppingCartJdbcImpl implements ShoppingCartDao {
             ResultSet resultSet = statement.executeQuery();
             if (resultSet.next()) {
                 return Optional.of(getShoppingCartFromResultSet(resultSet));
-            } else {
-                return Optional.empty();
             }
+            return Optional.empty();
         } catch (SQLException e) {
             throw new DataProcessingException("Getting cart failed", e);
         }
@@ -130,6 +125,31 @@ public class ShoppingCartJdbcImpl implements ShoppingCartDao {
             throws SQLException {
         Long cartId = resultSet.getLong("cart_id");
         Long userId = resultSet.getLong("user_id");
-        return new ShoppingCart(cartId, userId, productDao.getProductsByCart(cartId));
+        return new ShoppingCart(cartId, userId, getProductsByCart(cartId));
+    }
+
+    private List<Product> getProductsByCart(Long cartId) {
+        String query = "SELECT id, product_name, price FROM shopping_carts_products scp"
+                + " JOIN products p ON scp.product_id = p.id"
+                + " WHERE scp.cart_id = ?;";
+        List<Product> products = new ArrayList<>();
+        try (Connection connection = ConnectionUtil.getConnection()) {
+            PreparedStatement statement = connection.prepareStatement(query);
+            statement.setLong(1, cartId);
+            ResultSet resultSet = statement.executeQuery();
+            while (resultSet.next()) {
+                products.add(getProductFromResultSet(resultSet));
+            }
+            return products;
+        } catch (SQLException e) {
+            throw new DataProcessingException("Getting products from cart failed", e);
+        }
+    }
+
+    private Product getProductFromResultSet(ResultSet resultSet) throws SQLException {
+        Long id = resultSet.getLong("id");
+        String name = resultSet.getString("product_name");
+        BigDecimal price = resultSet.getBigDecimal("price");
+        return new Product(id, name, price);
     }
 }

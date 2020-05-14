@@ -1,5 +1,6 @@
 package org.example.internetshop.dao.jdbc;
 
+import java.math.BigDecimal;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -9,7 +10,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import org.example.internetshop.dao.OrderDao;
-import org.example.internetshop.dao.ProductDao;
 import org.example.internetshop.dao.ShoppingCartDao;
 import org.example.internetshop.exception.DataProcessingException;
 import org.example.internetshop.lib.Dao;
@@ -21,9 +21,7 @@ import org.example.internetshop.utill.ConnectionUtil;
 @Dao
 public class OrderDaoJdbcImpl implements OrderDao {
     @Inject
-    ShoppingCartDao shoppingCartDao;
-    @Inject
-    ProductDao productDao;
+    private ShoppingCartDao shoppingCartDao;
 
     @Override
     public List<Order> getUserOrders(Long userId) {
@@ -71,9 +69,8 @@ public class OrderDaoJdbcImpl implements OrderDao {
             ResultSet resultSet = statement.executeQuery();
             if (resultSet.next()) {
                 return Optional.of(getOrderFromResultSet(resultSet));
-            } else {
-                return Optional.empty();
             }
+            return Optional.empty();
         } catch (SQLException e) {
             throw new DataProcessingException("Getting order failed", e);
         }
@@ -146,9 +143,34 @@ public class OrderDaoJdbcImpl implements OrderDao {
         }
     }
 
+    public List<Product> getProductByOrder(Long orderId) {
+        String query = "SELECT id, product_name, price FROM orders_products op"
+                + " JOIN products p ON op.product_id = p.id"
+                + " WHERE op.order_id = ?;";
+        List<Product> products = new ArrayList<>();
+        try (Connection connection = ConnectionUtil.getConnection()) {
+            PreparedStatement statement = connection.prepareStatement(query);
+            statement.setLong(1, orderId);
+            ResultSet resultSet = statement.executeQuery();
+            while (resultSet.next()) {
+                products.add(getProductFromResultSet(resultSet));
+            }
+            return products;
+        } catch (SQLException e) {
+            throw new DataProcessingException("Getting products from order failed", e);
+        }
+    }
+
+    private Product getProductFromResultSet(ResultSet resultSet) throws SQLException {
+        Long id = resultSet.getLong("id");
+        String name = resultSet.getString("product_name");
+        BigDecimal price = resultSet.getBigDecimal("price");
+        return new Product(id, name, price);
+    }
+
     private Order getOrderFromResultSet(ResultSet resultSet) throws SQLException {
         Long orderId = resultSet.getLong("order_id");
         Long userId = resultSet.getLong("user_id");
-        return new Order(orderId, userId, productDao.getProductByOrder(orderId));
+        return new Order(orderId, userId, getProductByOrder(orderId));
     }
 }
