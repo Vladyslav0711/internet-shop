@@ -3,7 +3,6 @@ package org.example.internetshop.service;
 import java.util.List;
 import org.example.internetshop.model.Order;
 import org.example.internetshop.model.Product;
-import org.example.internetshop.model.User;
 
 public interface OrderService {
 
@@ -11,9 +10,11 @@ public interface OrderService {
 
     boolean delete(Long id);
 
-    Order completeOrder(List<Product> products, User user);
+    boolean deleteUserOrders(Long userId);
 
-    List<Order> getUserOrders(User user);
+    Order completeOrder(List<Product> products, Long userId);
+
+    List<Order> getUserOrders(Long userId);
 
     List<Order> getAll();
 }

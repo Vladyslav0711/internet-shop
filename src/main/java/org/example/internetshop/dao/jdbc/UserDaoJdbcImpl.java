@@ -19,6 +19,7 @@ import org.example.internetshop.utill.ConnectionUtil;
 
 @Dao
 public class UserDaoJdbcImpl implements UserDao {
+
     @Override
     public Optional<User> findByLogin(String login) {
         String query = "SELECT * FROM users WHERE login=?";
@@ -92,6 +93,9 @@ public class UserDaoJdbcImpl implements UserDao {
             statement.setString(4, user.getPassword());
             statement.setLong(5, user.getId());
             statement.executeUpdate();
+            query = "DELETE FROM users WHERE id=?;";
+            clearUserInfo(query, connection, user.getId());
+            setUserRoles(user);
             ResultSet resultSet = statement.getResultSet();
             return getUserFromResultSet(resultSet);
         } catch (SQLException e) {
@@ -149,8 +153,8 @@ public class UserDaoJdbcImpl implements UserDao {
             for (Role role : user.getRoles()) {
                 statement.setLong(1, user.getId());
                 statement.setLong(2, role.getId());
+                statement.executeUpdate();
             }
-            statement.executeUpdate();
         } catch (SQLException e) {
             throw new DataProcessingException("Setting user role failed", e);
         }

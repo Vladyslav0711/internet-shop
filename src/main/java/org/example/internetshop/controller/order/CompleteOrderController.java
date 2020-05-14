@@ -10,7 +10,6 @@ import javax.servlet.http.HttpSession;
 import org.example.internetshop.lib.Injector;
 import org.example.internetshop.model.Product;
 import org.example.internetshop.model.ShoppingCart;
-import org.example.internetshop.model.User;
 import org.example.internetshop.service.OrderService;
 import org.example.internetshop.service.ShoppingCartService;
 
@@ -28,8 +27,7 @@ public class CompleteOrderController extends HttpServlet {
         Long userId = (Long) session.getAttribute("user_id");
         ShoppingCart shoppingCart = shoppingCartService.getByUserId(userId);
         List<Product> products = shoppingCart.getProducts();
-        User user = shoppingCart.getUser();
-        orderService.completeOrder(products, user);
+        orderService.completeOrder(products, userId);
         resp.sendRedirect(req.getContextPath() + "/cart");
     }
 }

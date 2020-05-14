@@ -7,7 +7,6 @@ import org.example.internetshop.lib.Service;
 import org.example.internetshop.model.Order;
 import org.example.internetshop.model.Product;
 import org.example.internetshop.model.ShoppingCart;
-import org.example.internetshop.model.User;
 import org.example.internetshop.service.OrderService;
 import org.example.internetshop.service.ShoppingCartService;
 
@@ -31,18 +30,27 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
-    public Order completeOrder(List<Product> products, User user) {
+    public boolean deleteUserOrders(Long userId) {
+        for (Order order : orderDao.getUserOrders(userId)) {
+            orderDao.delete(order.getId());
+        }
+        return true;
+    }
+
+    @Override
+    public Order completeOrder(List<Product> products, Long userId) {
         List<Product> copyProducts = List.copyOf(products);
-        Order order = new Order(user, copyProducts);
+        Order order = new Order(userId, copyProducts);
         order = orderDao.create(order);
-        ShoppingCart shoppingCart = shoppingCartService.getByUserId(user.getId());
+        ShoppingCart shoppingCart = shoppingCartService.getByUserId(userId);
+        order = orderDao.update(order);
         shoppingCartService.clear(shoppingCart);
         return order;
     }
 
     @Override
-    public List<Order> getUserOrders(User user) {
-        return orderDao.getUserOrders(user);
+    public List<Order> getUserOrders(Long userId) {
+        return orderDao.getUserOrders(userId);
     }
 
     @Override

@@ -12,9 +12,13 @@ public interface ShoppingCartService {
 
     boolean deleteProduct(ShoppingCart shoppingCart, Product product);
 
+    boolean deleteCart(Long id);
+
     void clear(ShoppingCart shoppingCart);
 
     ShoppingCart getByUserId(Long userId);
 
     List<Product> getAllProducts(ShoppingCart shoppingCart);
+
+    Product getProductFromCart(ShoppingCart shoppingCart, Long productId);
 }

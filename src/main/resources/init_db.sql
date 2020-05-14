@@ -90,3 +90,6 @@ CREATE TABLE `internet_shop`.`shopping_carts_products` (
     REFERENCES `internet_shop`.`products` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION);
+
+INSERT INTO `internet_shop`.`roles` (`role_name`) VALUES ('USER');
+INSERT INTO `internet_shop`.`roles` (`role_name`) VALUES ('ADMIN');

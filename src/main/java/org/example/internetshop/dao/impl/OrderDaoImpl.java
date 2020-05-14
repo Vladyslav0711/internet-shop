@@ -6,11 +6,8 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 import org.example.internetshop.dao.OrderDao;
 import org.example.internetshop.dao.Storage;
-import org.example.internetshop.lib.Dao;
 import org.example.internetshop.model.Order;
-import org.example.internetshop.model.User;
 
-@Dao
 public class OrderDaoImpl implements OrderDao {
     @Override
     public Order create(Order order) {
@@ -40,10 +37,10 @@ public class OrderDaoImpl implements OrderDao {
     }
 
     @Override
-    public List<Order> getUserOrders(User user) {
+    public List<Order> getUserOrders(Long userId) {
         return Storage.orders
                 .stream()
-                .filter(o -> o.getUser().equals(user))
+                .filter(o -> o.getUserId().equals(userId))
                 .collect(Collectors.toList());
     }
 
@@ -51,4 +48,5 @@ public class OrderDaoImpl implements OrderDao {
     public List<Order> getAll() {
         return Storage.orders;
     }
+
 }
