@@ -91,7 +91,7 @@ public class UserDaoJdbcImpl implements UserDao {
             statement.setString(4, user.getPassword());
             statement.setLong(5, user.getId());
             statement.executeUpdate();
-            query = "DELETE FROM users WHERE id=?;";
+            query = "DELETE FROM users_roles WHERE user_id=?;";
             clearUserInfo(query, connection, user.getId());
             setUserRoles(user);
             return user;

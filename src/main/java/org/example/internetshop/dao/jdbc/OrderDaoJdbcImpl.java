@@ -133,7 +133,7 @@ public class OrderDaoJdbcImpl implements OrderDao {
                 + " VALUES (?, ?)";
         try (Connection connection = ConnectionUtil.getConnection()) {
             PreparedStatement statement = connection.prepareStatement(query);
-            for (Product product : shoppingCartDao.get(order.getUserId()).get().getProducts()) {
+            for (Product product : order.getProducts()) {
                 statement.setLong(1, order.getId());
                 statement.setLong(2, product.getId());
                 statement.executeUpdate();
