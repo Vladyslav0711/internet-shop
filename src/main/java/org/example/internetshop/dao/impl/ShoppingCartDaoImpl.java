@@ -5,10 +5,8 @@ import java.util.Optional;
 import java.util.stream.IntStream;
 import org.example.internetshop.dao.ShoppingCartDao;
 import org.example.internetshop.dao.Storage;
-import org.example.internetshop.lib.Dao;
 import org.example.internetshop.model.ShoppingCart;
 
-@Dao
 public class ShoppingCartDaoImpl implements ShoppingCartDao {
 
     @Override
@@ -41,13 +39,5 @@ public class ShoppingCartDaoImpl implements ShoppingCartDao {
     @Override
     public List<ShoppingCart> getAll() {
         return Storage.shoppingCarts;
-    }
-
-    @Override
-    public Optional<ShoppingCart> getByUserId(Long userId) {
-        return Storage.shoppingCarts
-                .stream()
-                .filter(s -> s.getUser().getId().equals(userId))
-                .findFirst();
     }
 }

@@ -9,15 +9,12 @@ import javax.servlet.http.HttpSession;
 import org.example.internetshop.lib.Injector;
 import org.example.internetshop.model.Product;
 import org.example.internetshop.model.ShoppingCart;
-import org.example.internetshop.service.ProductService;
 import org.example.internetshop.service.ShoppingCartService;
 
 public class DeleteProductFromCartController extends HttpServlet {
     private static final Injector INJECTOR = Injector.getInstance("org.example.internetshop");
     private ShoppingCartService shoppingCartService =
             (ShoppingCartService) INJECTOR.getInstance(ShoppingCartService.class);
-    private ProductService productService =
-            (ProductService) INJECTOR.getInstance(ProductService.class);
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp)
@@ -26,7 +23,8 @@ public class DeleteProductFromCartController extends HttpServlet {
         Long userId = (Long) session.getAttribute("user_id");
         String productId = req.getParameter("product_id");
         ShoppingCart shoppingCart = shoppingCartService.getByUserId(userId);
-        Product product = productService.get(Long.valueOf(productId));
+        Product product = shoppingCartService
+                .getProductFromCart(shoppingCart, (Long.valueOf(productId)));
         shoppingCartService.deleteProduct(shoppingCart, product);
         resp.sendRedirect(req.getContextPath() + "/cart");
     }
