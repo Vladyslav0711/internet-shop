@@ -1,10 +1,9 @@
 package org.example.internetshop.utill;
 
-import org.apache.log4j.Logger;
-
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
+import org.apache.log4j.Logger;
 
 public class HashUtil {
     private static Logger logger = Logger.getLogger(HashUtil.class);
@@ -18,7 +17,7 @@ public class HashUtil {
 
     public static String hashPassword(String password, byte[] salt) {
         StringBuilder hashedPassword = new StringBuilder();
-        try{
+        try {
             MessageDigest messageDigest = MessageDigest.getInstance("SHA-512");
             messageDigest.update(salt);
             byte[] digest = messageDigest.digest(password.getBytes());
@@ -31,5 +30,4 @@ public class HashUtil {
         }
         return hashedPassword.toString();
     }
-
 }
