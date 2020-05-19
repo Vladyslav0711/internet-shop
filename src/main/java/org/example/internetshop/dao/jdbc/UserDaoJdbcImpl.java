@@ -38,8 +38,8 @@ public class UserDaoJdbcImpl implements UserDao {
 
     @Override
     public User create(User user) {
-        String query = "INSERT INTO users (name, surname, login, password)"
-                + "VALUES (?, ?, ?, ?);";
+        String query = "INSERT INTO users (name, surname, login, password, salt)"
+                + "VALUES (?, ?, ?, ?, ?);";
         try (Connection connection = ConnectionUtil.getConnection()) {
             PreparedStatement statement = connection
                     .prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
@@ -47,6 +47,7 @@ public class UserDaoJdbcImpl implements UserDao {
             statement.setString(2, user.getSurname());
             statement.setString(3, user.getLogin());
             statement.setString(4, user.getPassword());
+            statement.setBytes(5, user.getSalt());
             statement.executeUpdate();
             ResultSet resultSet = statement.getGeneratedKeys();
             if (resultSet.next()) {
@@ -82,6 +83,7 @@ public class UserDaoJdbcImpl implements UserDao {
                 + "surname = ?"
                 + "login = ?"
                 + "password = ?"
+                + "salt = ?"
                 + "WHERE id = ?";
         try (Connection connection = ConnectionUtil.getConnection()) {
             PreparedStatement statement = connection.prepareStatement(query);
@@ -89,7 +91,8 @@ public class UserDaoJdbcImpl implements UserDao {
             statement.setString(2, user.getSurname());
             statement.setString(3, user.getLogin());
             statement.setString(4, user.getPassword());
-            statement.setLong(5, user.getId());
+            statement.setBytes(5, user.getSalt());
+            statement.setLong(6, user.getId());
             statement.executeUpdate();
             query = "DELETE FROM users_roles WHERE user_id=?;";
             clearUserInfo(query, connection, user.getId());
@@ -138,8 +141,9 @@ public class UserDaoJdbcImpl implements UserDao {
         String surname = resultSet.getString("surname");
         String login = resultSet.getString("login");
         String password = resultSet.getString("password");
+        byte[] salt = resultSet.getBytes("salt");
 
-        return new User(id, name, surname, login, password, getUserRoles(id));
+        return new User(id, name, surname, login, password, getUserRoles(id), salt);
     }
 
     private void setUserRoles(User user) {

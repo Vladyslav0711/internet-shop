@@ -93,3 +93,7 @@ CREATE TABLE `internet_shop`.`shopping_carts_products` (
 
 INSERT INTO `internet_shop`.`roles` (`role_name`) VALUES ('USER');
 INSERT INTO `internet_shop`.`roles` (`role_name`) VALUES ('ADMIN');
+
+ALTER TABLE `internet_shop`.`users`
+ADD COLUMN `salt` BLOB NOT NULL AFTER `password`;
+
