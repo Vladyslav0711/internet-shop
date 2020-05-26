@@ -6,15 +6,18 @@ CREATE TABLE internet_shop.products (
   price DOUBLE NOT NULL,
   PRIMARY KEY (id));
 
-CREATE TABLE `users` (
-  `id` bigint(11) NOT NULL AUTO_INCREMENT,
-  `name` varchar(225) NOT NULL,
-  `surname` varchar(225) NOT NULL,
-  `login` varchar(225) NOT NULL,
-  `password` varchar(225) NOT NULL,
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `login_UNIQUE` (`login`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
+create table users
+(
+    id       bigint(11) auto_increment
+        primary key,
+    name     varchar(225) not null,
+    surname  varchar(225) not null,
+    login    varchar(225) not null,
+    password varchar(225) not null,
+    salt     blob         not null,
+    constraint login_UNIQUE
+        unique (login)
+);
 
 
   CREATE TABLE `internet_shop`.`roles` (
@@ -94,6 +97,4 @@ CREATE TABLE `internet_shop`.`shopping_carts_products` (
 INSERT INTO `internet_shop`.`roles` (`role_name`) VALUES ('USER');
 INSERT INTO `internet_shop`.`roles` (`role_name`) VALUES ('ADMIN');
 
-ALTER TABLE `internet_shop`.`users`
-ADD COLUMN `salt` BLOB NOT NULL AFTER `password`;
 

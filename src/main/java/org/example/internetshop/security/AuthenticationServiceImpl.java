@@ -9,6 +9,7 @@ import org.example.internetshop.utill.HashUtil;
 
 @Service
 public class AuthenticationServiceImpl implements AuthenticationService {
+
     @Inject
     private UserService userService;
 

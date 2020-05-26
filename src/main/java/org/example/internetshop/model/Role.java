@@ -24,10 +24,6 @@ public class Role {
         return roleName;
     }
 
-    public void setRoleName(RoleName roleName) {
-        this.roleName = roleName;
-    }
-
     public enum RoleName {
         USER, ADMIN;
     }

@@ -7,15 +7,14 @@ public class Product {
     private String name;
     private BigDecimal price;
 
-    public Product(Long id, String name, BigDecimal price) {
-        this.id = id;
+    public Product(String name, BigDecimal price) {
         this.name = name;
         this.price = price;
     }
 
-    public Product(String name, BigDecimal price) {
-        this.name = name;
-        this.price = price;
+    public Product(Long id, String name, BigDecimal price) {
+        this(name, price);
+        this.id = id;
     }
 
     public Long getId() {
@@ -37,11 +36,7 @@ public class Product {
     public BigDecimal getPrice() {
         return price;
     }
-
-    public void setPrice(BigDecimal price) {
-        this.price = price;
-    }
-
+    
     @Override
     public String toString() {
         return "Item{"
