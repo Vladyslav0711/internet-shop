@@ -7,6 +7,7 @@ import org.example.internetshop.lib.Inject;
 import org.example.internetshop.lib.Service;
 import org.example.internetshop.model.User;
 import org.example.internetshop.service.UserService;
+import org.example.internetshop.utill.HashUtil;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -16,6 +17,10 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User create(User user) {
+        byte[] salt = HashUtil.getSalt();
+        String hashedPass = HashUtil.hashPassword(user.getPassword(), salt);
+        user.setPassword(hashedPass);
+        user.setSalt(salt);
         return userDao.create(user);
     }
 
