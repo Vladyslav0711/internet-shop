@@ -38,6 +38,7 @@ This is a simple implementation of online store.
   * log4j 1.2.17
   * mysql-connector-java 8.0.20
   * maven-checkstyle-plugin 3.1.1
+  * bootstrap
 
 <hr/>
 
