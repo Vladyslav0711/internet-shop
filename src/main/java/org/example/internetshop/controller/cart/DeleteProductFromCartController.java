@@ -12,7 +12,7 @@ import org.example.internetshop.service.ShoppingCartService;
 
 public class DeleteProductFromCartController extends HttpServlet {
     private static final Injector INJECTOR = Injector.getInstance("org.example.internetshop");
-    private ShoppingCartService shoppingCartService =
+    private final ShoppingCartService shoppingCartService =
             (ShoppingCartService) INJECTOR.getInstance(ShoppingCartService.class);
 
     @Override

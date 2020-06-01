@@ -13,7 +13,7 @@ import org.example.internetshop.security.AuthenticationService;
 
 public class LoginController extends HttpServlet {
     private static final Injector INJECTOR = Injector.getInstance("org.example.internetshop");
-    private AuthenticationService authenticationService =
+    private final AuthenticationService authenticationService =
             (AuthenticationService) INJECTOR.getInstance(AuthenticationService.class);
 
     @Override

@@ -12,7 +12,7 @@ import org.example.internetshop.service.ProductService;
 
 public class GetAllProductController extends HttpServlet {
     private static final Injector INJECTOR = Injector.getInstance("org.example.internetshop");
-    private ProductService productService =
+    private final ProductService productService =
             (ProductService) INJECTOR.getInstance(ProductService.class);
 
     @Override

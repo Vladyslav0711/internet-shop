@@ -14,7 +14,7 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <maven.checkstyle.plugin.version>3.1.1</maven.checkstyle.plugin.version>
-        <sonar.projectKey>handsome0711_internet-shop</sonar.projectKey>
+        <sonar.projectKey>Handsome0711_internet-shop</sonar.projectKey>
         <sonar.organization>handsome0711</sonar.organization>
         <sonar.host.url>https://sonarcloud.io</sonar.host.url>
         <sonar.login>d07603ced756b82104e8f5260a32c9d3ae810479</sonar.login>
