@@ -11,4 +11,4 @@ addons:
   sonarcloud:
     organization: "handsome0711"
     token:
-      secure: "d07603ced756b82104e8f5260a32c9d3ae810479"
+      secure: travice encrypt d07603ced756b82104e8f5260a32c9d3ae810479
