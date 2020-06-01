@@ -14,12 +14,8 @@ public class User {
 
     public User(Long id, String name, String surname,
                 String login, String password, Set<Role> roles, byte[] salt) {
+        this(name, surname, login, password, roles);
         this.id = id;
-        this.name = name;
-        this.surname = surname;
-        this.login = login;
-        this.password = password;
-        this.roles = roles;
         this.salt = salt;
     }
 
@@ -43,16 +39,8 @@ public class User {
         return roles;
     }
 
-    public void setRoles(Set<Role> roles) {
-        this.roles = roles;
-    }
-
     public String getSurname() {
         return surname;
-    }
-
-    public void setSurname(String surname) {
-        this.surname = surname;
     }
 
     public Long getId() {

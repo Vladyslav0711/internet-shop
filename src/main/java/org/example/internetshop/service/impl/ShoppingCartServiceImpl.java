@@ -1,6 +1,5 @@
 package org.example.internetshop.service.impl;
 
-import java.util.List;
 import org.example.internetshop.dao.ShoppingCartDao;
 import org.example.internetshop.lib.Inject;
 import org.example.internetshop.lib.Service;
@@ -49,14 +48,9 @@ public class ShoppingCartServiceImpl implements ShoppingCartService {
     }
 
     @Override
-    public List<Product> getAllProducts(ShoppingCart shoppingCart) {
-        return shoppingCart.getProducts();
-    }
-
-    @Override
     public Product getProductFromCart(ShoppingCart shoppingCart, Long productId) {
         return shoppingCart.getProducts().stream()
-                .filter(p -> p.getId().equals(Long.valueOf(productId)))
+                .filter(p -> p.getId().equals(productId))
                 .findFirst()
                 .get();
     }

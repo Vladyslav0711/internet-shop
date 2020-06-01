@@ -61,22 +61,6 @@ public class UserDaoJdbcImpl implements UserDao {
     }
 
     @Override
-    public Optional<User> get(Long id) {
-        String query = "SELECT * FROM users WHERE id=?";
-        try (Connection connection = ConnectionUtil.getConnection()) {
-            PreparedStatement statement = connection.prepareStatement(query);
-            statement.setLong(1, id);
-            ResultSet resultSet = statement.executeQuery();
-            if (resultSet.next()) {
-                return Optional.of(getUserFromResultSet(resultSet));
-            }
-            return Optional.empty();
-        } catch (SQLException e) {
-            throw new DataProcessingException("Getting user failed", e);
-        }
-    }
-
-    @Override
     public User update(User user) {
         String query = "UPDATE users"
                 + "SET name = ?"
@@ -101,6 +85,22 @@ public class UserDaoJdbcImpl implements UserDao {
         } catch (SQLException e) {
             throw new DataProcessingException("Update user with id = "
                     + user.getId() + "failed", e);
+        }
+    }
+
+    @Override
+    public Optional<User> get(Long id) {
+        String query = "SELECT * FROM users WHERE id=?";
+        try (Connection connection = ConnectionUtil.getConnection()) {
+            PreparedStatement statement = connection.prepareStatement(query);
+            statement.setLong(1, id);
+            ResultSet resultSet = statement.executeQuery();
+            if (resultSet.next()) {
+                return Optional.of(getUserFromResultSet(resultSet));
+            }
+            return Optional.empty();
+        } catch (SQLException e) {
+            throw new DataProcessingException("Getting user failed", e);
         }
     }
 

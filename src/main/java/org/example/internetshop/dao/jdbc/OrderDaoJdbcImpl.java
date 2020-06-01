@@ -27,16 +27,19 @@ public class OrderDaoJdbcImpl implements OrderDao {
     public List<Order> getUserOrders(Long userId) {
         String query = "SELECT * FROM orders WHERE user_id=?";
         try (Connection connection = ConnectionUtil.getConnection()) {
-            List<Order> orders = new ArrayList<>();
-            PreparedStatement statement = connection.prepareStatement(query);
-            statement.setLong(1, userId);
-            ResultSet resultSet = statement.executeQuery();
-            while (resultSet.next()) {
-                orders.add(getOrderFromResultSet(resultSet));
-            }
-            return orders;
+            return getOrders(query, userId, connection);
         } catch (SQLException e) {
-            throw new DataProcessingException("Getting user orders failed", e);
+            throw new DataProcessingException("Getting user's orders failed", e);
+        }
+    }
+
+    @Override
+    public List<Order> getAll() {
+        String query = "SELECT * FROM orders";
+        try (Connection connection = ConnectionUtil.getConnection()) {
+            return getOrders(query, null, connection);
+        } catch (SQLException e) {
+            throw new DataProcessingException("Getting all orders failed", e);
         }
     }
 
@@ -105,22 +108,6 @@ public class OrderDaoJdbcImpl implements OrderDao {
         }
     }
 
-    @Override
-    public List<Order> getAll() {
-        String query = "SELECT * FROM orders";
-        try (Connection connection = ConnectionUtil.getConnection()) {
-            List<Order> orders = new ArrayList<>();
-            PreparedStatement statement = connection.prepareStatement(query);
-            ResultSet resultSet = statement.executeQuery();
-            while (resultSet.next()) {
-                orders.add(getOrderFromResultSet(resultSet));
-            }
-            return orders;
-        } catch (SQLException e) {
-            throw new DataProcessingException("Getting all orders failed", e);
-        }
-    }
-
     private boolean clearOrderInfo(String query, Connection connection, Long orderId)
             throws SQLException {
         PreparedStatement statement = connection.prepareStatement(query);
@@ -172,5 +159,19 @@ public class OrderDaoJdbcImpl implements OrderDao {
         Long orderId = resultSet.getLong("order_id");
         Long userId = resultSet.getLong("user_id");
         return new Order(orderId, userId, getProductByOrder(orderId));
+    }
+
+    private List<Order> getOrders(String query, Long id, Connection connection)
+            throws SQLException {
+        List<Order> orders = new ArrayList<>();
+        PreparedStatement statement = connection.prepareStatement(query);
+        if (id != null) {
+            statement.setLong(1, id);
+        }
+        ResultSet resultSet = statement.executeQuery();
+        while (resultSet.next()) {
+            orders.add(getOrderFromResultSet(resultSet));
+        }
+        return orders;
     }
 }

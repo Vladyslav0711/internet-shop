@@ -7,15 +7,14 @@ public class Order {
     private Long userId;
     private List<Product> products;
 
-    public Order(Long id, Long userId, List<Product> products) {
-        this.id = id;
+    public Order(Long userId, List<Product> products) {
         this.userId = userId;
         this.products = products;
     }
 
-    public Order(Long userId, List<Product> products) {
-        this.userId = userId;
-        this.products = products;
+    public Order(Long id, Long userId, List<Product> products) {
+        this(userId, products);
+        this.id = id;
     }
 
     public Long getId() {
