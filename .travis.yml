@@ -1,8 +1,14 @@
-language: java
 jdk:
   - openjdk11
 script:
-  - mvn clean install
+  - mvn clean org.jacoco:jacoco-maven-plugin:prepare-agent install sonar:sonar -Dsonar.projectKey=Handsome0711_internet-shop
+
 cache:
   directories:
     - $HOME/.m2
+
+addons:
+  sonarcloud:
+    organization: "handsome0711"
+    token:
+      secure: "d07603ced756b82104e8f5260a32c9d3ae810479"
